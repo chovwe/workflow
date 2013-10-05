@@ -1,0 +1,13 @@
+<html>
+
+<head>
+<script src="jquery.js"></script>
+<script src="ckeditor.js"></script>
+<script src="adapters/jquery.js"></script>
+</head>
+
+<body>
+<textarea id="ckeditor"></textarea>
+</body>
+
+</html>

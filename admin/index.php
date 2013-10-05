@@ -334,9 +334,8 @@
                 <div id="ui_content"></div>
             </div>
         </div>
-    
-    <!--<script type='text/javascript' src='../calls/scripts/tinymce/jquery.tinymce.min.js'></script>-->
-        <script type='text/javascript' src='../calls/scripts/tinymce/tinymce.min.js'></script>
+        <script type='text/javascript' src='../calls/scripts/ckeditor/ckeditor.js'></script>
+        <script type='text/javascript' src='../calls/scripts/ckeditor/adapters/jquery.js'></script>
     
     
     </body>

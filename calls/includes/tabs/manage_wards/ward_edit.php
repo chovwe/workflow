@@ -34,7 +34,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="percent35">Number of Beds:</td>
+                            <td class="percent35">Bed Quota:</td>
                             <td><?php Form::textbox('nums_of_bed', $ward->nums_of_bed); ?></td>
                         </tr>
                         <tr>
@@ -190,7 +190,7 @@
                             ward_id = $(document).find("#ward_id").attr("value");
                             $ui_engine.block({title:'Alert!',file:'alert_successful',width:'200',height:'120',buttons:'NNY'});
                             $file_loader.load_left_pane('manage_wards/menu_left');
-                            $file_loader.load_middle_pane('manage_wards/ward_display', {ward_id:ward_id});
+                            $file_loader.load_generic_content( "manage_wards/ward_display", "ward_id=" + ward_id, "manage_wards_pane" );
                         }
                         else
                         {

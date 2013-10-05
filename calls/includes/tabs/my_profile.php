@@ -46,7 +46,7 @@
             <div>
             </div>
         </div>
-        <div class="middle_pane">
+        <div class="middle_pane" id="profile_pane">
             <div class="outter_pad">
                 <div class="inner_pad">
                      

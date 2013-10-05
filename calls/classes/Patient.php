@@ -107,7 +107,7 @@ class Patient
     public function fetch_patient($patient_id)
     {
         // SQL
-        $sql = "SELECT p.title, p.id_alias, p.first_visit_date, p.last_visit_date, p.visit_counter, p.first_name,
+        $sql = "SELECT p.patient_id, p.title, p.id_alias, p.first_visit_date, p.last_visit_date, p.visit_counter, p.first_name,
                        p.middle_name, p.surname, p.gender, p.address, p.email, p.phone_1, p.phone_2, p.date_of_birth,
                        p.marital_status, p.religion, p.occupation, p.patient_type, p.blood_type, p.rh, p.account_status,
                        p.assigned_doctor_id, p.country, p.ref_hospital_id, p.ref_doctor_id, k.first_name AS kin_first_name,

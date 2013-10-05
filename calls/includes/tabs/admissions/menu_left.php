@@ -1,6 +1,6 @@
 <div>
     <ul class="profile_menu">
-        <li><a href="#" id="ward_display">View Wards</a></li>
+        <li><a href="#" id="admission_list">View Admissions</a></li>
     </ul>
 </div>
 <script>
@@ -9,8 +9,7 @@
         $(".profile_menu li a").on('click', function(e)
         {
             e.preventDefault();
-            $file_loader.load_middle_pane('manage_wards/' + $(this).attr("id"));
-            //alert($(this).attr("id"));
+            $file_loader.load_middle_pane('admissions/' + $(this).attr("id"));
         });
     });
 </script>

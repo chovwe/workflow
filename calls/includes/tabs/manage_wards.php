@@ -57,9 +57,10 @@
             <div>
             </div>
         </div>
-        <div class="middle_pane">
+        <div class="middle_pane" id="manage_wards_pane">
             <div class="outter_pad">
                 <div class="inner_pad">
+                
                 </div>
                 
                 <div class="clear"></div>

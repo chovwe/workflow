@@ -3,42 +3,60 @@
     require_once( INCLUDES.DIRECTORY_SEPARATOR.'functions.php' );
     
     // Class instances
+    $session      = new Session();
     $int_profile  = new Int_Profile();
-    $hospital     = new Hospital();
     $option       = new Option();
+    $patient      = new Patient();
+    $ward         = new Ward();
+    $bed          = new Bed();
     
-    // Patient ID Alias Generator
-    $pid_alias = $option->next_code('pid_alias');
-    if ($pid_alias != '')
+    $pid = $name = "";
+    
+    // Check if a patient has been loadded into memory
+    
+    // Fetch patient based on patient ID
+    $patient      = $patient->fetch_patient((int)$session->get_patient_id());
+    
+    if($patient)
     {
-        $next_code = 'P' . date('ym') . '/' . pad($pid_alias, 2);
-    } else {
-        $next_code = '';
+        $pid      = $patient[0]['patient_id'];
+        $name     = $patient[0]['surname']." ".$patient[0]['first_name'];
     }
 ?>
     
-<form name="frm_new_patient" id="frm_new_patient" method="post">
+<form name="frm_new_admission" id="frm_new_admission" method="post">
     <div class="outter_pad">
         <div class="l_float percent50">
             <div class="inner_pad">
                 <div class="fieldset">
-                    <div class="legend">Ward Details:</div>
+                    <div class="legend">New Admission Details:</div>
                     <table class="visible_table">
                         <tr>
-                            <td class="percent35">Ward Name:</td>
-                            <td><?php Form::textbox('tittle'); ?></td>
+                            <td class="percent35">Patient Name:</td>
+                            <td>
+                                <?php Form::textbox('name', $name, array('readonly' => 'true')); ?>
+                                <?php Form::hidden_field('patient_id', $pid); ?>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="percent35">Number of Beds:</td>
-                            <td><?php Form::textbox('num_beds'); ?></td>
+                            <td>Ward:</td>
+                            <td><?php Form::selectbox($ward = $ward->dropdown_list(),'ward_id'); ?></td>
                         </tr>
                         <tr>
-                            <td  style="vertical-align:top;">Description:</td>
-                            <td><?php Form::textarea("description"); ?></td>
+                            <td>Bed:</td>
+                            <td id="ward_bed"><?php Form::selectbox(array(), 'bed_id'); ?></td>
                         </tr>
                         <tr>
-                            <td>Ward Type:</td>
-                            <td><?php Form::selectbox($option->dropdown_list('ward_type'),'sel_ward_type'); ?></td>
+                            <td  style="vertical-align:top;">Remarks:</td>
+                            <td><?php Form::textarea("remarks"); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Start Date:</td>
+                            <td><?php Form::textbox('start_date', '', array('readonly' => 'true')); ?></td>
+                        </tr>
+                        <tr>
+                            <td>End Date:</td>
+                            <td><?php Form::textbox('end_date', '', array('readonly' => 'true')); ?></td>
                         </tr>
                     </table>
                     <!-- Tooltip -->
@@ -69,31 +87,24 @@
 <script type="text/javascript">
     $(document).ready(function()
     {
-        $init.equalize_heights(['#fieldset_contact','#fieldset_official']);
-        $init.equalize_heights(['#fieldset_nok','#fieldset_other']);
-        
-        // File uploader
-        $('#btn_patient_pix').on('click', function()
-        {
-            $('#fil_patient_pix').trigger('click');
-        });
-        
         // Jquery date picker
-        $( "#txt_dob" ).datepicker({ dateFormat: "dd/mm/yy", changeMonth: true, changeYear: true });
+        $( "#start_date" ).datepicker({ dateFormat: "yy-mm-dd", minDate: 0});
+        $( "#end_date" ).datepicker({ dateFormat: "yy-mm-dd", minDate: 0});
+        
+        //
+        $("#ward_id").on('change', function()
+        {
+            ward_id = $(this).val();
+            $ajax_loading('ward_bed', '../calls/includes/switch.php', '&opt=ward&sub_opt=ward_bed&ward_id=' + ward_id);
+        });
         
         // Switch on validator for certain form fields
         $validator.activate([
-            {'name':'#sel_title','type':'select'},   // Title
-            {'name':'#txt_fname','type':'text'},     // First Name
-            {'name':'#txt_sname','type':'text'},     // Surname
-            {'name':'#sel_gender','type':'select'},  // Gender
-            {'name':'#txta_address','type':'text'},  // Address
-            {'name':'#txt_phone1','type':'text'},    // Phone 1
-            {'name':'#txt_pid_alias','type':'text'}, // Patient ID
-            {'name':'#sel_ptype','type':'select'},   // Patient Type
-            {'name':'#sel_intdoc','type':'select'},  // Assigned Doctor
-            {'name':'#sel_status','type':'select'},  // Patient Status
-            {'name':'#txt_age','type':'text'}        // Age
+            {'name':'#name','type':'text'},   // Title
+            {'name':'#ward_id','type':'select'},     // ward_id
+            {'name':'#bed_id','type':'select'},     // bed_id
+            {'name':'#start_date','type':'text'},  // start_date
+            {'name':'#end_date','type':'text'}  // end_date
         ]);
         
         // Reset the form field appearance
@@ -120,7 +131,7 @@
         });
         
         // Form        
-        $("#frm_new_patient").on('submit', function($this)
+        $("#frm_new_admission").on('submit', function($this)
         {
             // Prevent the form from submitting
             $this.preventDefault();
@@ -186,8 +197,8 @@
             if ($no_error)
             {
                 // Create an instance of the FormData() object to assemble form elements
-                var formData = new FormData($("#frm_new_patient")[0]);
-                formData.append('opt', 'insert_patient');
+                var formData = new FormData($("#frm_new_admission")[0]);
+                formData.append('opt', 'insert_admission');
                 
                 $.ajax({
                     url: "../calls/includes/switch.php",
@@ -202,8 +213,8 @@
                         if($json.status == "true")
                         {
                             $ui_engine.block({title:'Alert!',file:'alert_successful',width:'200',height:'120',buttons:'NNY'});
-                            $file_loader.load_middle_pane('patients/patient_display');
-                            $file_loader.load_left_pane('patients/menu_left');
+                            //$file_loader.load_middle_pane('admissions/admission_list');
+                            $file_loader.load_left_pane('admissions/menu_left');
                         }
                         else
                         {

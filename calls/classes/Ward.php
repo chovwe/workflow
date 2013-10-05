@@ -147,6 +147,25 @@ class Ward {
         return array_shift($query);
     }
     
+    
+    /**
+     * Ward::dropdown_list()
+     * 
+     * @return
+     */
+    public function dropdown_list()
+    {
+        // SQL
+        $sql = "SELECT w.ward_id as id , CONCAT(w.tittle, ' (', o.option_name, ')') as name
+                FROM ".self::$table_name." w
+                INNER JOIN options o
+                ON o.option_id=w.ward_type
+                ORDER BY w.tittle ASC";
+        
+        // Execute
+        return $this->database_obj->execute_query($sql,'Array');
+    }
+    
     /**
      * Ward::initialize_result_vars()
      * 

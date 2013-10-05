@@ -3,30 +3,22 @@
     require_once( INCLUDES.DIRECTORY_SEPARATOR.'functions.php' );
     
     // Class instances
+    $session      = new Session();
     $int_profile  = new Int_Profile();
-    $hospital     = new Hospital();
     $option       = new Option();
-    
-    // Patient ID Alias Generator
-    $pid_alias = $option->next_code('pid_alias');
-    if ($pid_alias != '')
-    {
-        $next_code = 'P' . date('ym') . '/' . pad($pid_alias, 2);
-    } else {
-        $next_code = '';
-    }
 ?>
     
-<form name="frm_new_patient" id="frm_new_patient" method="post">
+<form name="frm_new_note" id="frm_new_note" method="post">
     <div class="outter_pad">
         
-        <div class="l_float percent100">
+        <div class="percent100">
             <div class="inner_pad">
                 <div class="fieldset">
-                    <div class="legend">Note:</div>
+                    <div class="legend">New Note:</div>
                     <table class="visible_table">
                         <tr>
                             <td colspan="2">
+                                <?php Form::hidden_field('patient_id', (int)$session->get_patient_id()); ?>
                                 <?php Form::textarea('note'); ?>
                             </td>
                         </tr>
@@ -35,7 +27,7 @@
             </div>
         </div>
         
-        <div class="l_float percent100">
+        <div class="percent100">
             <div class="inner_pad">
                 <div class="fieldset">
                     <div class="legend">Controls:</div>
@@ -59,7 +51,7 @@
         $init.equalize_heights(['#fieldset_nok','#fieldset_other']);
     
         // Form        
-        $("#frm_new_patient").on('submit', function($this)
+        $("#frm_new_note").on('submit', function($this)
         {
             // Prevent the form from submitting
             $this.preventDefault();
@@ -122,9 +114,9 @@
             if ($no_error)
             {
                 // Create an instance of the FormData() object to assemble form elements
-                var formData = new FormData($("#frm_new_patient")[0]);
-                formData.append('opt', 'nurse_patient_note');
-                
+                var formData = new FormData($("#frm_new_note")[0]);
+                formData.append('opt', 'note');
+                formData.append('note', $("#note").val());
                 $.ajax({
                     url: "../calls/includes/switch.php",
                     type: "POST",
@@ -138,8 +130,8 @@
                         if($json.status == "true")
                         {
                             $ui_engine.block({title:'Alert!',file:'alert_successful',width:'200',height:'120',buttons:'NNY'});
-                            $file_loader.load_middle_pane('patients/patient_display');
-                            $file_loader.load_left_pane('patients/menu_left');
+                            $file_loader.load_middle_pane('patients/patient_notes');
+                            $file_loader.load_left_pane('patients/patient_menu');
                         }
                         else
                         {
@@ -154,10 +146,27 @@
                 });
             }
         });
+        
+        editor = $("#note").ckeditor().editor;
+        
+        editor.config.toolbar =
+        [
+            { name: 'clipboard',   items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+            { name: 'editing',     items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
+            { name: 'forms',       items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+            { name: 'links',       items : [ 'Link','Unlink','Anchor' ] },
+            { name: 'insert',      items : [ 'Table','HorizontalRule','SpecialChar','PageBreak' ] },
+            { name: 'tools',       items : [ 'Maximize', 'ShowBlocks','-' ] },
+            '/',
+            { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+            { name: 'paragraph',   items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
+            { name: 'styles',      items : [ 'Styles','Format','Font','FontSize' ] },
+            { name: 'colors',      items : [ 'TextColor','BGColor' ] }
+        ];
     });
 </script>
 <script type="text/javascript">
-tinymce.init({
+/*tinymce.init({
     selector: "textarea",
     height: 250,    
     plugins: [
@@ -166,7 +175,6 @@ tinymce.init({
         "insertdatetime table contextmenu paste"
     ],
     toolbar: "undo redo styleselect bold italic alignleft aligncenter alignright alignjustify bullist numlist",    
-    menubar: "file format view edit table",
-    toolbar_items_size: 'small'
- });
+    menubar: "file format view edit table"
+ });*/
 </script>

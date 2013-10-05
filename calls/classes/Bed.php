@@ -141,6 +141,39 @@ class Bed {
         return self::initialize_result_vars($query);
     }
     
+    public function fetch_by_ward_id($ward_id)
+    {
+        // Execute query
+        $query = $this->query(array(
+            'select' => "*",
+            'from'   => self::$table_name,
+            'where'  => "ward_id={$ward_id}",
+            'limit'  => "1",
+            'format' => 'Array'
+        ));
+    }
+    
+    /**
+     * Bed::dropdown_list()
+     * 
+     * @return
+     */
+    public function dropdown_list($ward_id)
+    {
+        // SQL
+        $sql = "SELECT b.bed_id as id , CONCAT(bi.tittle, ' (', o.option_name, ')') as name
+                FROM ".self::$table_name." b
+                INNER JOIN bed_inventory bi
+                ON bi.bed_inventory_id=b.bed_inventory_id
+                INNER JOIN options o
+                ON o.option_id=bi.bed_type
+                WHERE b.ward_id=$ward_id
+                ORDER BY bi.tittle ASC";
+        
+        // Execute
+        return $this->database_obj->execute_query($sql,'Array');
+    }
+    
     /**
      * Bed::initialize_result_vars()
      * 

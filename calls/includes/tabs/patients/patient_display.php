@@ -59,11 +59,6 @@
 ?>
 
 <div class="outter_pad">
-    <div id="extra_tools" style="margin: 20px;">
-        <button class="button" id="btn_consult" name="btn_consult" style="width: 120px;">Consultation</button>
-        <button class="button" id="btn_note" name="btn_note" style="width: 120px;">Note</button>
-        <button class="button" id="btn_review" name="btn_review" style="width: 120px;">Review</button>
-    </div>
     <div class="l_float percent50">
         <div class="inner_pad">
             <div class="fieldset">
@@ -332,17 +327,5 @@
         $init.equalize_heights(['#fieldset_contact','#fieldset_official']);
         $init.equalize_heights(['#fieldset_nok','#fieldset_other']);
         
-        $("#btn_consult").one('click', function(){
-           $file_loader.load_middle_pane('patients/patient_consult'); 
-        });
-        
-        $("#btn_note").one('click', function(){
-           $file_loader.load_middle_pane('patients/patient_nurse_notes'); 
-        });
-        
-        
-        $("#btn_review").one('click', function(){
-           $file_loader.load_middle_pane('patients/review'); 
-        });
     });
 </script>

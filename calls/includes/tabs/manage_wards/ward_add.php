@@ -19,7 +19,7 @@
                             <td><?php Form::textbox('tittle'); ?></td>
                         </tr>
                         <tr>
-                            <td class="percent35">Number of Beds:</td>
+                            <td class="percent35">Bed Quota:</td>
                             <td><?php Form::textbox('nums_of_bed'); ?></td>
                         </tr>
                         <tr>
@@ -59,6 +59,7 @@
 <script type="text/javascript">
     $(document).ready(function()
     {        
+        $("#tittle").focus();
         // Switch on validator for certain form fields
         $validator.activate([
             {'name':'#tittle','type':'text'},   // Title
@@ -157,7 +158,8 @@
             {
                 // Create an instance of the FormData() object to assemble form elements
                 var formData = new FormData($("#frm_new_ward")[0]);
-                formData.append('opt', 'insert_ward');
+                formData.append('opt', 'ward');
+                formData.append('sub_opt', 'insert_ward');
                 
                 $.ajax({
                     url: "../calls/includes/switch.php",
@@ -173,7 +175,7 @@
                         {
                             $ui_engine.block({title:'Alert!',file:'alert_successful',width:'200',height:'120',buttons:'NNY'});
                             $file_loader.load_left_pane('manage_wards/menu_left');
-                            $file_loader.load_middle_pane('manage_wards/ward_list');
+                            //$file_loader.load_middle_pane('manage_wards/ward_list');
                             $("#frm_new_ward")[0].reset();
                         }
                         else

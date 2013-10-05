@@ -230,10 +230,10 @@
                             <td class="percent35">Patient Type:</td>
                             <td><?php Form::selectbox($option->dropdown_list('patient_type'),'sel_ptype',$ptype); ?></td>
                         </tr>
-                        <tr>
+                        <!--<tr>
                             <td>Assigned Doctor:</td>
                             <td><?php Form::selectbox($int_profile->dropdown_list('Doctor'),'sel_intdoc',$intdoc); ?></td>
-                        </tr>
+                        </tr>-->
                         <tr>
                             <td class="percent35">Blood Type:</td>
                             <td>

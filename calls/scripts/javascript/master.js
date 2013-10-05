@@ -779,7 +779,7 @@ $file_loader =
         $( $href + " > .sub_wrapper .sub_content"  ).load( $file_url );
     },
     
-    load_left_pane: function($file, $data)
+    load_left_pane: function($file)
     {
         var
             // Fetch the "href" of the current active tab
@@ -789,10 +789,10 @@ $file_loader =
             $file_url = '../calls/includes/tabs/' + $file + '.php';
             
             // Load Side Kick
-            $( $href + " > .sub_wrapper .left_pane"  ).load( $file_url, $data );
+            $( $href + " > .sub_wrapper .left_pane"  ).load( $file_url );
     },
     
-    load_middle_pane: function($file, $data)
+    load_middle_pane: function($file)
     {
         var
             // Fetch the "href" of the current active tab
@@ -802,10 +802,10 @@ $file_loader =
             $file_url = '../calls/includes/tabs/' + $file + '.php';
             
         // Load Middle Pane
-        $( $href + " > .sub_wrapper .middle_pane"  ).load( $file_url, $data );
+        $( $href + " > .sub_wrapper .middle_pane"  ).load( $file_url );
     },
     
-    load_right_pane: function($file, $data)
+    load_right_pane: function($file)
     {
         var
             // Fetch the "href" of the current active tab
@@ -815,7 +815,31 @@ $file_loader =
             $file_url = '../calls/includes/tabs/' + $file + '.php';
             
         // Load Right Pane
-        $( $href + " > .sub_wrapper .right_pane"  ).load( $file_url, $data );
+        $( $href + " > .sub_wrapper .right_pane"  ).load( $file_url );
+    },
+    
+    load_generic_content: function($file, $data, $target_div_id)
+    {
+        var 
+            // External file
+            $file_url = '../calls/includes/tabs/' + $file + '.php';
+        
+        // Load generic content based on given params
+        $.ajax({
+            url: $file_url,
+            type: "POST",
+            data: $data,
+            dataType: "html",
+            cache: false,
+            success: function(html)
+            {
+                $(document).find("div#" + $target_div_id).html(html);
+            },
+            error: function(request, status, erro)
+            {
+                alert(request.responseText);
+            }
+        });
     }
 }
 

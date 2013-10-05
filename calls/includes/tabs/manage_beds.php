@@ -33,7 +33,7 @@
                     </table>
                 </li>
                 <li>
-                    <a href="javascript:edit_bed_inventory();" title="Edit Bed" class="edit_bed_inventory">
+                    <a href="#" title="Edit Bed" class="edit_bed_inventory">
                         <table class="inner_table">
                             <tr>
                                 <td style="width:32px;">
@@ -57,7 +57,7 @@
             <div>
             </div>
         </div>
-        <div class="middle_pane">
+        <div class="middle_pane" id="manage_beds_pane">
             <div class="outter_pad">
                 <div class="inner_pad">
                      
@@ -79,17 +79,16 @@
     {
         // Load the Left/Right Menu
         $file_loader.load_left_pane('manage_beds/menu_left');
-        $file_loader.load_middle_pane('manage_beds/bed_invetory_list');
-        $file_loader.load_right_pane('manage_beds/menu_right');
-        $(document).find(".edit_bed_inventory").attr("href", "#");
+        $file_loader.load_middle_pane('manage_beds/bed_inventory_list');
+        //$file_loader.load_right_pane('manage_beds/menu_right');
         // Balance the height
         $init.height_balance();
         
         // Set the interface to edit existing Profile details
     new_bed_inventory = function()
     {
-        $file_loader.load_middle_pane('manage_beds/bed_add');
-        $file_loader.load_left_pane('manage_beds/menu_right');
+        $file_loader.load_middle_pane('manage_beds/bed_inventory_add');
+        //$file_loader.load_left_pane('manage_beds/menu_right');
     }
     });
 </script>

@@ -1,6 +1,13 @@
-<?php require_once( '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'init.php' ); ?>
+<?php 
+    require_once( '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'init.php' ); 
+    //Class instance
+    $session = new Session();
+    $pid     = $session->get_patient_id();
+?>
+
 <div>
     <ul class="pool">
+    <?php if($pid != ""){?>
         <li>
             <a href="#">Vital Signs:</a>
             <ul>
@@ -24,6 +31,7 @@
                 </li>
             </ul>
         </li>
+    <?php } ?>
         <li>
             <a href="#">Nurses Pool (3)</a>
             <ul>

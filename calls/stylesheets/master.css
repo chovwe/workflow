@@ -415,7 +415,7 @@ body{
             border: none;
         }
         .tab .ui-widget-content {
-            border: none;
+            /*border: none;*/
         }
         .tab .ui-tabs .ui-tabs-panel {
             padding: 0; /*20px*/
@@ -493,13 +493,13 @@ body{
             background-image: url('../images/floor.png');
             background-repeat: repeat;
         }
-        .tab .ui-corner-all, .tab .ui-corner-bottom, .tab .ui-corner-right, .tab .ui-corner-br {
+        /*.tab .ui-corner-all, .tab .ui-corner-bottom, .tab .ui-corner-right, .tab .ui-corner-br {
              border-radius: 0;
             -moz-border-radius: 0;
             -webkit-border-radius: 0;
             -khtml-border-radius: 0;
         }
-        /*.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+        .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
             background-image: url('../images/light.png');
             background-repeat: repeat;
         }*/
@@ -918,3 +918,10 @@ button.btn_pix {
 .datatable tr.header{color: #fff; background-color: #444; background-image: linear-gradient(#666, #000 100%);}
 .datatable tr td{padding: 8px 5px;}
 .datatable tr td a{display:  block; font-weight:  bold;}
+.light-text {
+    color: #c0c0c0;
+}
+.visible_table p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}

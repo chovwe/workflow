@@ -219,7 +219,7 @@
         
         <div class="percent100 clear"></div>
         
-        <div class="l_float percent100">
+        <div class="percent100">
             <div class="inner_pad">
                 <div id="fieldset_qualification" class="fieldset">
                     <div class="legend">Qualification Details:</div>

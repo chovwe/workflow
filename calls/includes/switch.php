@@ -24,7 +24,7 @@
                     
                     // Authentication message
                     $user_obj = $user->query(array(
-                        'select' => 'id, passcode',
+                        'select' => 'user_id, passcode',
                         'from'   => 'users',
                         'where'  => "login_id='$login_id'",
                         'limit'  => '1',
@@ -269,6 +269,7 @@
                             }
                         }
                         $json['status'] = 'true';
+                        $session->set_session_message("The specified Record has been updated successfully.");
                     }
                     else
                     {
@@ -571,6 +572,7 @@
                             }
                             
                             $json['status'] = 'true';
+                        $session->set_session_message("The specified Record has been updated successfully.");
                         }else{
                             $json['status'] = 'false';
                         }
@@ -600,6 +602,7 @@
                         if($status)
                         {
                             $json['status'] = 'true';
+                        $session->set_session_message("The specified Record has been updated successfully.");
                         }else{
                             $json['status'] = 'false';
                         }
@@ -636,85 +639,221 @@
                     if($vital_sign->insert_vital_sign())
                     {
                         $json['status'] = 'true';
+                        $session->set_session_message("The record has been saved successfully.");
                     }else{
                         $json['status'] = 'false';
                     }
                 }
                 echo json_encode($json);
             break;
-            case "doc_patient_consult":
-                
-                $json['status'] = 'true';
-                echo json_encode($json);
-            break;
-            case "nurse_patient_note";
-                
-                $json['status'] = 'true';
-                echo json_encode($json);
-            break;
-            case "reviews":
-                
-                $json['status'] = 'true';
-                echo json_encode($json);
-            break;
-            case "insert_ward":
+            case "insert_admission":
                 // Init.
                 $json = array();
                 
                 // Session instance
-                $session = new Session();
+                $session   = new Session();
                 // Profile instance
-                $profile = new Int_Profile();
-                // Ward instance
-                $ward    = new Ward();
+                $profile   = new Int_Profile();
+                // Admission instance
+                $admission = new Admission();
                 
-                if($ward instanceof Ward)
+                if($admission instanceof Admission)
                 {
-                    $ward_arr            = $_POST;
-                    $int_profile_id      = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
-                    $ward_arr['int_profile_id'] = $int_profile_id;
-                    $ward_arr['date_created'] = get_current_date();
-                    $ward_arr['date_modified'] = get_current_date();
-                    // Setup POST vars
-                    $ward->set_ward_vars($ward_arr);
-                    if($ward->insert_ward())
+                    $admission_arr                   = $_POST;
+                    $int_profile_id                  = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
+                    $admission_arr['int_profile_id'] = $int_profile_id;
+                    $admission_arr['entry_date']     = get_current_date();
+                    // Set up POST vars
+                    $admission->set_admission_vars($admission_arr);
+                    if($admission->insert_admission())
                     {
                         $json['status'] = 'true'; 
-                        $session->set_session_message("The specified Ward has been created successfully.");
+                        $session->set_session_message("The specified Admission has been created successfully.");
                     }else{
                         $json['status'] = 'false';
                     }
                 }
                 echo json_encode($json);
             break;
-            case "update_ward":
+            case "update_admission":
+                
                 // Init.
                 $json = array();
                 
                 // Session instance
-                $session = new Session();
+                $session   = new Session();
                 // Profile instance
-                $profile = new Int_Profile();
-                // Ward instance
-                $ward    = new Ward();
+                $profile   = new Int_Profile();
+                // Admission instance
+                $admission = new Admission();
                 
-                if($ward instanceof Ward)
+                if($admission instanceof Admission)
                 {
-                    $ward_arr            = $_POST;
-                    $int_profile_id      = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
-                    $ward_arr['int_profile_id'] = $int_profile_id;
-                    $ward_arr['date_modified'] = get_current_date();
-                    // Setup POST vars
-                    $ward->set_ward_vars($ward_arr);
-                    if($ward->update_ward())
+                    
+                    if($admission->update_admission())
                     {
                         $json['status'] = 'true'; 
-                        $session->set_session_message("The specified Ward has been updated successfully.");
+                        $session->set_session_message("The specified record has been updated successfully.");
                     }else{
                         $json['status'] = 'false';
                     }
                 }
                 echo json_encode($json);
+            break;
+            case "ward":
+                // Sub option for grouping related actions
+                switch($_POST['sub_opt'])
+                {
+                    case "insert_ward":
+                        // Init.
+                        $json = array();
+                        
+                        // Session instance
+                        $session = new Session();
+                        // Profile instance
+                        $profile = new Int_Profile();
+                        // Ward instance
+                        $ward    = new Ward();
+                        
+                        if($ward instanceof Ward)
+                        {
+                            $ward_arr            = $_POST;
+                            $int_profile_id      = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
+                            $ward_arr['int_profile_id'] = $int_profile_id;
+                            $ward_arr['date_created'] = get_current_date();
+                            $ward_arr['date_modified'] = get_current_date();
+                            // Setup POST vars
+                            $ward->set_ward_vars($ward_arr);
+                            if($ward->insert_ward())
+                            {
+                                $json['status'] = 'true'; 
+                                $session->set_session_message("The specified Ward has been created successfully.");
+                            }else{
+                                $json['status'] = 'false';
+                            }
+                        }
+                        echo json_encode($json);
+                    break;
+                    case "update_ward":
+                        // Init.
+                        $json = array();
+                        
+                        // Session instance
+                        $session = new Session();
+                        // Profile instance
+                        $profile = new Int_Profile();
+                        // Ward instance
+                        $ward    = new Ward();
+                        
+                        if($ward instanceof Ward)
+                        {
+                            $ward_arr            = $_POST;
+                            $int_profile_id      = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
+                            $ward_arr['int_profile_id'] = $int_profile_id;
+                            $ward_arr['date_modified'] = get_current_date();
+                            // Setup POST vars
+                            $ward->set_ward_vars($ward_arr);
+                            if($ward->update_ward())
+                            {
+                                $json['status'] = 'true'; 
+                                $session->set_session_message("The specified Record has been updated successfully.");
+                            }else{
+                                $json['status'] = 'false';
+                            }
+                        }
+                        echo json_encode($json);
+                    break;
+                    case "ward_bed";
+                        // Init.
+                        $ward_id = $_POST['ward_id'];
+                        
+                        if (isset($ward_id))
+                        {
+                            // Bed instance
+                            $ward_bed         = new Bed();
+            
+                            // Beds associated with a specific Ward
+                            $ward_bed_arr     = array();
+                            
+                            if($ward_bed instanceof Bed)
+                            {
+                                $ward_bed_arr = $ward_bed->dropdown_list($ward_id);
+                            }
+                            
+                            if (!empty($ward_bed_arr))
+                            {
+                                Form::selectbox($ward_bed_arr,'bed_id');
+                            }
+                            else
+                            {
+                                Form::selectbox(array(),'sel_extdoc');
+                            }
+                        }
+                    break;
+                }
+            break;
+            case "bed_inventory":
+                switch($_POST['sub_opt'])
+                {
+                    case "insert_bed_inventory":
+                        // Init.
+                        $json = array();
+                        
+                        // Session instance
+                        $session = new Session();
+                        // Profile instance
+                        $profile = new Int_Profile();
+                        // Bed_inventory instance
+                        $bed_inventory = new Bed_inventory();
+                        
+                        if($bed_inventory instanceof Bed_inventory)
+                        { 
+                            $bed_inventory_arr                   = $_POST;
+                            $profile_id                          = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
+                            $bed_inventory_arr['int_profile_id'] = $profile_id;
+                            $bed_inventory_arr['date_created']   = get_current_date();
+                            $bed_inventory_arr['date_modified']  = get_current_date();
+                            $bed_inventory->set_bed_inventory_vars($bed_inventory_arr);
+                            if($bed_inventory->insert_bed_inventory())
+                            {
+                                $json['status'] = 'true'; 
+                                $session->set_session_message("The specified Record has been updated successfully.");
+                            }else{
+                                $json['status'] = 'false';
+                            }
+                        }
+                        echo json_encode($json);
+                    break;
+                    case "update_bed_inventory":
+                        // Init.
+                        $json = array();
+                        
+                        // Session instance
+                        $session = new Session();
+                        // Profile instance
+                        $profile = new Int_Profile();
+                        // Bed_inventory instance
+                        $bed_inventory = new Bed_inventory();
+                        if($bed_inventory instanceof Bed_inventory)
+                        {
+                            $bed_inventory_arr                   = $_POST;
+                            $profile_id                          = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
+                            $bed_inventory_arr['int_profile_id'] = $profile_id;
+                            $bed_inventory_arr['date_modified']  = get_current_date();
+                            $bed_inventory->set_bed_inventory_vars($bed_inventory_arr);
+                            if($bed_inventory->update_bed_inventory())
+                            {
+                                $json['status'] = 'true'; 
+                                $session->set_session_message("The specified Record has been updated successfully.");
+                            }else{
+                                $json['status'] = 'false';
+                                $session->set_session_message("The specified Record has not been updated.");
+                            }
+                            
+                        }
+                        echo json_encode($json);
+                    break;
+                }
             break;
             case "insert_bed":
                 // Init.
@@ -738,7 +877,7 @@
                     if($bed->insert_bed())
                     {
                         $json['status'] = 'true'; 
-                        $session->set_session_message("The specified Bed has been created successfully.");
+                        $session->set_session_message("The record has been saved successfully.");
                     }else{
                         $json['status'] = 'false';
                     }
@@ -766,43 +905,40 @@
                     if($bed->update_bed())
                     {
                         $json['status'] = 'true'; 
-                        $session->set_session_message("The specified Bed has been updated successfully.");
+                        $session->set_session_message("The specified Record has been updated successfully.");
                     }else{
                         $json['status'] = 'false';
                     }
                 }
                 echo json_encode($json);
-            break;
-            case "insert_bed_inventory":
-                // Init.
-                $json = array();
-                
+            break;            
+            case "consultation":
                 // Session instance
                 $session = new Session();
                 // Profile instance
                 $profile = new Int_Profile();
-                // Bed_inventory instance
-                $bed_inventory = new Bed_inventory();
+                // Consultation instance
+                $consult = new Consultation();
                 
-                if($bed_inventory instanceof Bed_inventory)
-                { 
-                    $bed_inventory_arr                   = $_POST;
-                    $profile_id                          = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
-                    $bed_inventory_arr['int_profile_id'] = $profile_id;
-                    $bed_inventory_arr['date_created']   = get_current_date();
-                    $bed_inventory_arr['date_modified']  = get_current_date();
-                    $bed_inventory->set_bed_inventory_vars($bed_inventory_arr);
-                    if($bed_inventory->insert_bed_inventory())
+                if($consult instanceof Consultation)
+                {
+                    $consult_arr                   = $_POST;
+                    $profile_id                    = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
+                    $consult_arr['int_profile_id'] = $profile_id;
+                    $consult_arr['entry_date']     = get_current_date();
+                    $consult->set_consultation_vars($consult_arr);
+                    
+                    if($consult->insert_consultation($consult_arr))
                     {
                         $json['status'] = 'true'; 
-                        $session->set_session_message("The specified Bed(s) has been created successfully.");
+                        $session->set_session_message("The record has been saved successfully.");
                     }else{
                         $json['status'] = 'false';
                     }
                 }
                 echo json_encode($json);
             break;
-            case "update_bed_inventory":
+            case "note";
                 // Init.
                 $json = array();
                 
@@ -810,28 +946,28 @@
                 $session = new Session();
                 // Profile instance
                 $profile = new Int_Profile();
-                // Bed_inventory instance
-                $bed_inventory = new Bed_inventory();
-                if($bed_inventory instanceof Bed_inventory)
+                // Note instance
+                $note    = new Note();
+                if($note instanceof Note)
                 {
-                    if($bed_inventory->fetch_by_bed_inventory_id((int)$_POST['bed_inventory_id']))
+                    $note_arr                   = $_POST;
+                    $profile_id                 = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
+                    $note_arr['int_profile_id'] = $profile_id;
+                    $note_arr['entry_date']     = get_current_date();
+                    $note->set_note_vars($note_arr);
+                    if($note->insert_note())
                     {
-                        $bed_inventory_arr                   = $_POST;
-                        $profile_id                          = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
-                        $bed_inventory_arr['int_profile_id'] = $profile_id;
-                        $bed_inventory_arr['date_modified']  = get_current_date();
-                        if($bed_inventory->update_bed_inventory())
-                        {
-                            $json['status'] = 'true'; 
-                            $session->set_session_message("The specified Bed(s) has been updated successfully.");
-                        }else{
-                            $json['status'] = 'false';
-                        }
+                        $json['status'] = 'true';
                     }else{
                         $json['status'] = 'false';
+                        $session->set_session_message($note_arr['note'] );
                     }
-                    
                 }
+                echo json_encode($json);
+            break;
+            case "reviews":
+                
+                $json['status'] = 'true';
                 echo json_encode($json);
             break;
             

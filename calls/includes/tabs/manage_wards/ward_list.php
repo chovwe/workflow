@@ -17,7 +17,7 @@
                     <tr class="header">
                         <th style="padding: 10px 10px 5px;font-weight: bold; border-top-left-radius: 4px; ">Ward Name</th>
                         <th style="padding: 5px; font-weight: bold;" width="15%">Ward Type</th>
-                        <th style="padding: 10px 5px; font-weight: bold;" width="10%">Bed Units</th>
+                        <th style="padding: 10px 5px; font-weight: bold;" width="10%">Bed Quota</th>
                         <th style="padding: 10px 5px; font-weight: bold; border-top-right-radius: 4px;" width="25%">Entry Date</th>
                     </tr>
                     <?php
@@ -67,12 +67,9 @@
         });
         $(".datatable tr td a.ward").on('click', function(e){
            e.preventDefault();
-           //alert("html");
            ward_id = $(this).attr('data');
-           $file_loader.load_middle_pane('manage_wards/ward_display', {ward_id:ward_id} )
+           $file_loader.load_generic_content( "manage_wards/ward_display", "ward_id=" + ward_id, "manage_wards_pane" );
         });
-        // disable the edit button
-        //$(document).find(".edit_ward").attr("href", "#");
         
     });
 </script>

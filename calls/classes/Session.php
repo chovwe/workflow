@@ -66,7 +66,7 @@ class Session
         // database should find user based on username/password
         if($user)
         {
-            $this->user_id   = $_SESSION['user_id'] = $user->id;
+            $this->user_id   = $_SESSION['user_id'] = $user->user_id;
             $this->logged_in = true;
         }
     }
@@ -118,10 +118,10 @@ class Session
      */
     public function logout()
     {
-        unset($_SESSION['user_id']);
-        unset($this->user_id);
+        unset($_SESSION['user_id'], $_SESSION['patient_id'], $_SESSION['message']);
+        unset($this->user_id, $this->patient_id, $this->message);
         $this->logged_in = false;
-        
+        //session_destroy();
         // Redirect
         //redirect_to();
     }

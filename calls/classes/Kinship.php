@@ -61,32 +61,32 @@ class Kinship
         if(isset($this->kinship_id))
         {
             // Initialize class properties
-            $this->kinship_id         = isset($arr['kinship_id'])            ? $arr['kinship_id']:         $this->kinship_id;
-            $this->patient_id         = isset($arr['patient_id'])            ? $arr['patient_id']:         $this->patient_id ;
-            $this->int_profile_id     = isset($arr['int_profile_id'])        ? $arr['int_profile_id']:     $this->int_profile_id;
-            $this->first_name         = isset($arr['txt_kin_fname'])         ? $arr['txt_kin_fname']:      $this->first_name;
-            $this->middle_name        = isset($arr['txt_kin_mname'])         ? $arr['txt_kin_mname']:      $this->middle_name;
-            $this->surname            = isset($arr['txt_kin_sname'])         ? $arr['txt_kin_sname']:      $this->surname;
-            $this->gender             = isset($arr['sel_kin_gender'])        ? $arr['sel_kin_gender']:     $this->gender;
-            $this->address            = isset($arr['txta_kin_address'])      ? $arr['txta_kin_address']:   $this->gender;
-            $this->email              = isset($arr['tx_kint_email'])         ? $arr['txt_kin_email']:      $this->address; 
-            $this->phone_1            = isset($arr['txt_kin_phone1'])        ? $arr['txt_kin_phone1']:     $this->phone_1;
-            $this->phone_2            = isset($arr['txt_kin_phone2'])        ? $arr['txt_kin_phone2']:     $this->phone_2;
-            $this->relationship       = isset($arr['sel_kin_relate'])        ? $arr['sel_kin_relate']:     $this->relationship;
+            $this->kinship_id         = isset($arr['kinship_id'])    ? $arr['kinship_id']:      $this->kinship_id;
+            $this->patient_id         = isset($arr['patient_id'])    ? $arr['patient_id']:      $this->patient_id ;
+            $this->int_profile_id     = isset($arr['int_profile_id'])? $arr['int_profile_id']:  $this->int_profile_id;
+            $this->first_name         = isset($arr['fname'])         ? $arr['fname']:           $this->first_name;
+            $this->middle_name        = isset($arr['mname'])         ? $arr['mname']:           $this->middle_name;
+            $this->surname            = isset($arr['sname'])         ? $arr['sname']:           $this->surname;
+            $this->gender             = isset($arr['gender'])        ? $arr['gender']:          $this->gender;
+            $this->address            = isset($arr['address'])       ? $arr['address']:         $this->gender;
+            $this->email              = isset($arr['email'])         ? $arr['email']:           $this->address; 
+            $this->phone_1            = isset($arr['phone1'])        ? $arr['phone1']:          $this->phone_1;
+            $this->phone_2            = isset($arr['phone2'])        ? $arr['phone2']:          $this->phone_2;
+            $this->relationship       = isset($arr['relate'])        ? $arr['relationship']:    $this->relationship;
         } else {
             // Initialize class properties
-            $this->kinship_id         = isset($arr['kinship_id'])            ? $arr['kinship_id']:         '';
-            $this->patient_id         = isset($arr['patient_id'])            ? $arr['patient_id']:         '';
-            $this->int_profile_id     = isset($arr['int_profile_id'])        ? $arr['int_profile_id']:     '';
-            $this->first_name         = isset($arr['txt_kin_fname'])         ? $arr['txt_kin_fname']:      '';
-            $this->middle_name        = isset($arr['txt_kin_mname'])         ? $arr['txt_kin_mname']:      '';
-            $this->surname            = isset($arr['txt_kin_sname'])         ? $arr['txt_kin_sname']:      '';
-            $this->gender             = isset($arr['sel_kin_gender'])        ? $arr['sel_kin_gender']:     '';
-            $this->address            = isset($arr['txta_kin_address'])      ? $arr['txta_kin_address']:   '';
-            $this->email              = isset($arr['tx_kint_email'])         ? $arr['txt_kin_email']:      ''; 
-            $this->phone_1            = isset($arr['txt_kin_phone1'])        ? $arr['txt_kin_phone1']:     '';
-            $this->phone_2            = isset($arr['txt_kin_phone2'])        ? $arr['txt_kin_phone2']:     '';
-            $this->relationship       = isset($arr['sel_kin_relate'])        ? $arr['sel_kin_relate']:     '';
+            $this->kinship_id         = isset($arr['kinship_id'])    ? $arr['kinship_id']:    '';
+            $this->patient_id         = isset($arr['patient_id'])    ? $arr['patient_id']:    '';
+            $this->int_profile_id     = isset($arr['int_profile_id'])? $arr['int_profile_id']:'';
+            $this->first_name         = isset($arr['fname'])         ? $arr['fname']:         '';
+            $this->middle_name        = isset($arr['mname'])         ? $arr['mname']:         '';
+            $this->surname            = isset($arr['sname'])         ? $arr['sname']:         '';
+            $this->gender             = isset($arr['gender'])        ? $arr['gender']:        '';
+            $this->address            = isset($arr['address'])       ? $arr['address']:       '';
+            $this->email              = isset($arr['email'])         ? $arr['email']:         ''; 
+            $this->phone_1            = isset($arr['phone1'])        ? $arr['phone1']:        '';
+            $this->phone_2            = isset($arr['phone2'])        ? $arr['phone2']:        '';
+            $this->relationship       = isset($arr['relationship'])  ? $arr['relationship']:  '';
         }
     }
     

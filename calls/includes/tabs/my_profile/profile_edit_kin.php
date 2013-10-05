@@ -6,7 +6,6 @@
     $session     = new Session();
     $int_profile = new Int_Profile();
     $option      = new Option();
-    $document    = new Document();
     
     // Init.
     $int_profile_id = $kin_fname = $kin_mname = $kin_sname = $kin_gender = $kin_address = $kin_email = $kin_phone1 = $kin_phone2 = $kin_relate = $dob = $marital = $religion = $qualification = $country = '';
@@ -46,40 +45,40 @@
                             <td class="percent35">First Name:</td>
                             <td>
                                 <?php Form::hidden_field('int_profile_id',$int_profile_id); ?>
-                                <?php Form::textbox('txt_kin_fname',$kin_fname); ?>
+                                <?php Form::textbox('fname',$kin_fname); ?>
                             </td>
                         </tr>
                         <tr>
                             <td>Middle Name:</td>
-                            <td><?php Form::textbox('txt_kin_mname',$kin_mname); ?></td>
+                            <td><?php Form::textbox('mname',$kin_mname); ?></td>
                         </tr>
                         <tr>
                             <td>Surname:</td>
-                            <td><?php Form::textbox('txt_kin_sname',$kin_sname); ?></td>
+                            <td><?php Form::textbox('sname',$kin_sname); ?></td>
                         </tr>
                         <tr>
                             <td>Gender:</td>
-                            <td><?php Form::selectbox(item_array('gender'),'sel_kin_gender',$kin_gender); ?></td>
+                            <td><?php Form::selectbox(item_array('gender'),'gender',$kin_gender); ?></td>
                         </tr>
                         <tr>
                             <td class="percent35" style="vertical-align:top;">Address:</td>
-                            <td><?php Form::textarea('txta_kin_address',$kin_address); ?></td>
+                            <td><?php Form::textarea('address',$kin_address); ?></td>
                         </tr>
                         <tr>
                             <td>Email:</td>
-                            <td><?php Form::textbox('txt_kin_email',$kin_email); ?></td>
+                            <td><?php Form::textbox('email',$kin_email); ?></td>
                         </tr>
                         <tr>
                             <td>Phone Number 1:</td>
-                            <td><?php Form::textbox('txt_kin_phone1',$kin_phone1); ?></td>
+                            <td><?php Form::textbox('phone1',$kin_phone1); ?></td>
                         </tr>
                         <tr>
                             <td>Phone Number 2:</td>
-                            <td><?php Form::textbox('txt_kin_phone2',$kin_phone2); ?></td>
+                            <td><?php Form::textbox('phone2',$kin_phone2); ?></td>
                         </tr>
                         <tr>
                             <td>Relationship:</td>
-                            <td><?php Form::selectbox($option->dropdown_list('relationship'),'sel_kin_relate',$kin_relate); ?></td>
+                            <td><?php Form::selectbox($option->dropdown_list('relationship'),'relationship',$kin_relate); ?></td>
                         </tr>
                     </table>
                     <!-- Tooltip -->
@@ -109,18 +108,6 @@
 <script type="text/javascript">
     $(document).ready(function()
     {
-        $init.equalize_heights(['#fieldset_contact','#fieldset_other']);
-        $init.equalize_heights(['#fieldset_nok','#fieldset_qualification']);
-        
-        // File uploader
-        $('#btn_patient_pix').on('click', function()
-        {
-            $('#fil_patient_pix').trigger('click');
-        });
-        
-        // Jquery date picker
-        $( "#txt_dob" ).datepicker({ dateFormat: "dd/mm/yy", changeMonth: true, changeYear: true });
-        
         // Switch on validator for certain form fields
         $validator.activate([
             {'name':'#sel_title','type':'select'},   // Title
@@ -258,50 +245,4 @@
             }
         });
     });
-    
-    // Process file upload
-    var $process_uploader = function()
-    {
-        var pix = $('#fil_patient_pix');
-        if(pix.val() === "")
-        {
-            $ui_engine.block({title:'Alert!',file:'alert_failure',width:'200',height:'120',buttons:'NNY'});
-        } else {
-            // Create an instance of the FileReader object
-            reader = new FileReader();
-            var file = $('#fil_patient_pix').prop("files")[0];
-            
-            reader.onload = function(event)
-            {
-                imgUrl = event.target.result;
-                $("#pix_display").attr({
-                    src: imgUrl,
-                    width: 100,
-                    height: 100
-                });
-            }
-            
-            reader.onerror = function(event) 
-            {
-                console.error("File could not be read! Code " + event.target.error.code);
-            };
-            
-            reader.readAsDataURL(file);
-        }
-    }
-</script>
-
-<script type="text/javascript">
-tinymce.init({
-    selector: "textarea#qualification",
-    height: 250,    
-    plugins: [
-        "advlist autolink lists link image charmap print preview anchor",
-        "searchreplace visualblocks code fullscreen",
-        "insertdatetime table contextmenu paste"
-    ],
-    toolbar: "undo redo styleselect bold italic alignleft aligncenter alignright alignjustify bullist numlist",    
-    menubar: "file format view edit table",
-    toolbar_items_size: 'small'
- });
 </script>

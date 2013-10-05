@@ -6,12 +6,12 @@
         <li><a href="#" id="patient_history">History</a></li>
         <li><a href="#" id="patient_visits">Visits</a></li>
         <li><a href="#" id="patient_complains">Complaints</a></li>
-        <li><a href="#" id="patient_oe">Other Obsevations</a></li>
+        <li><a href="#" id="patient_oo">Other Obsevations</a></li>
         <li><a href="#" id="patient_diagnosis">Diagnosis</a></li>
-        <li><a href="#" id="patient_plans">Plans</a></li>
+        <li><a href="#" id="patient_plans">Plans/Procedures</a></li>
         <li><a href="#" id="patient_notes">Extra Notes</a></li>
         <li><a href="#" id="patient_prescriptions">Prescriptions</a></li>
-        <li><a href="#" id="patient_consultations">Consultations</a></li>
+        <li><a href="#" id="patient_consultation">Consultations</a></li>
         <li><a href="#" id="patient_admissions">Admissions</a></li>
         <!--
         <li><a href="#">Charges</a></li>

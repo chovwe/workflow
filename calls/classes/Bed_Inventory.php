@@ -131,7 +131,7 @@ class Bed_inventory {
         
         // Execute query
         $query = $this->query(array(
-            'select' => "b.bed_inventory_id, b.tittle, b.units, b.description, b.date_created, b.date_modified, o.option_id, o.option_name as bed_type",
+            'select' => "b.bed_inventory_id, b.tittle, b.units, b.bed_type, b.description, b.date_created, b.date_modified, o.option_id, o.option_name as bed_type",
             'from'   => self::$table_name.' b',
             'inner join' => 'options o',
             'on' => 'o.option_id=b.bed_type',

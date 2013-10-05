@@ -1,5 +1,6 @@
 <div>
     <ul class="profile_menu">
+        <li><a href="#" id="review">Review</a></li>
         <li><a href="#" id="profile_display">View Profile</a></li>
         <li><a href="#" id="profile_edit_kin">Update Next Of Kin</a></li>
         <li><a href="#" id="profile_edit_password">Change Password</a></li>
