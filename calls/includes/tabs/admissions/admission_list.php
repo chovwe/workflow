@@ -32,7 +32,7 @@
                                     echo "<tr>";
                                     echo "<td><a href='#' data='".$entry->admission_id."' class='admission'>".ucwords("$entry->name")."</a></td>";
                                     echo "<td>".$entry->ward."</td>";
-                                    echo "<td>".$entry->bed."</td>";
+                                    echo "<td>".$entry->title."</td>";
                                     echo "<td>".$entry->start_date."</td>";
                                     echo "<td>".$entry->end_date."</td>";
                                     echo "</tr>";

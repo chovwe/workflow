@@ -110,19 +110,17 @@ class Admission {
     public function fetch_all()
     {
         //SQL
-        $sql = "SELECT a.admission_id, CONCAT(p.surname,', ',p.first_name) as name, 
-                       CONCAT(w.tittle, ' (', o.option_name, ')') as ward, bi.tittle as bed, a.start_date, a.end_date 
+        $sql = "SELECT a.admission_id, CONCAT(p.surname,' ',p.first_name) as name, 
+                       CONCAT(w.tittle, ' (', o.option_name, ')') as ward, b.title, a.start_date, a.end_date 
                 FROM ".self::$table_name." a
                 INNER JOIN patients p
                 ON p.patient_id=a.patient_id
                 INNER JOIN wards w
-                ON w.ward_id=a.admission_id
-			    INNER JOIN beds b
-			    ON b.ward_id=w.ward_id
-			    INNER JOIN bed_inventory bi
-			    ON bi.bed_inventory_id=b.bed_inventory_id
+                ON w.ward_id=a.ward_id
                 INNER JOIN options o
-                ON o.option_id=w.ward_type";
+                ON o.option_id=w.ward_type
+                INNER JOIN beds b
+                ON b.bed_id=a.bed_id";
         // Execute query
         return $this->database_obj->execute_query($sql, "O");
     }

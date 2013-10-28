@@ -620,18 +620,20 @@
                 $json = array();
                 
                 // Session instance
-                $session = new Session();
-                
+                $session    = new Session();
+                // Profile Instance
+                $profile    = new Int_Profile();
                 // Vital_Sign Instance
                 $vital_sign = new Vital_Sign();
                 
                 if($vital_sign instanceof Vital_Sign)
                 {
-                    $vitals_arr['patient_id'] = $session->get_patient_id();
-                    $vitals_arr['user_id']    = $session->user_id;
-                    $vitals_arr['temp']       = $_POST['txt_tmp'];
-                    $vitals_arr['bp']         = $_POST['txt_bp'];
-                    $vitals_arr['entry_date'] = get_current_date();
+                    $vitals_arr['patient_id']     = $session->get_patient_id();
+                    $int_profile_id               = ($profile->fetch_profile_by_user_id((int)$session->user_id))? $profile->int_profile_id : "";
+                    $vitals_arr['int_profile_id'] = $int_profile_id;
+                    $vitals_arr['temp']           = $_POST['txt_tmp'];
+                    $vitals_arr['bp']             = $_POST['txt_bp'];
+                    $vitals_arr['entry_date']     = get_current_date();
                     // Set Vital Sign vars
                     $vital_sign->set_vital_sign_vars($vitals_arr);
                     

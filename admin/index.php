@@ -24,6 +24,7 @@
         <!-- JQuery -->
         <script type="text/javascript" src="../calls/scripts/jquery/jquery.js"></script>
         <script type="text/javascript" src="../calls/scripts/jquery/jquery-ui.js"></script>
+        <script type="text/javascript" src="../calls/scripts/jquery/jquery.scrollabletab.js"></script>
         <script> $ = jQuery; </script>
         <script type="text/javascript" src="../calls/scripts/javascript/master.js"></script>
         
@@ -309,7 +310,11 @@
             </div>
             
             <div class="tab">
-                <div id="menu_tab"><ul></ul></div>
+                <div id="menu_tab">
+                    <ul>
+                        
+                    </ul>
+                </div>
             </div>
             
             <div id="footer" class="gray">

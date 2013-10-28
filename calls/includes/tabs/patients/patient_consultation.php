@@ -4,14 +4,14 @@
     
     // Class instances
     $session      = new Session();
+    $patient      = new Patient();
     $consultation = new Consultation();
     $int_profile  = new Int_Profile();
-    $option       = new Option();
+    $option       = new Option();$patient_name = $patient->fetch_patient_name_by_id((int)$session->get_patient_id());
 ?>
-    
     <div class="outter_pad">
         <div style="margin: 20px;">
-            <h2 style="padding: 0px; margin: 0px; color: #2d2d2d; font-size: 18px;">Consultations: (Patient Name)</h2>
+            <h2 style="padding: 0px; margin: 0px; color: #2d2d2d;  font-size: 18px;">Consultation: (<?php echo $patient_name->name; ?>)</h2>
         </div>
         <div id="extra_tools" style="margin: 20px;">
             <?php ?>
