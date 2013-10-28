@@ -4,19 +4,19 @@
     
     // Class instances
     $session      = new Session();
-    $patient      = new Patient();
     $note = new Note();
     $int_profile  = new Int_Profile();
     $option       = new Option();
-    $patient_name = $patient->fetch_patient_name_by_id((int)$session->get_patient_id());
 ?>
     <div class="outter_pad">
         <div style="margin: 20px;">
-            <h2 style="padding: 0px; margin: 0px; color: #2d2d2d;  font-size: 18px;">Notes: (<?php echo $patient_name->name; ?>)</h2>
+            <h2 style="padding: 0px; margin: 0px; color: #2d2d2d;  font-size: 18px;">Notes: (Patient Name)</h2>
         </div>
         
     <div id="extra_tools" style="margin: 20px;">
         <?php ?>
+        <!--<button class="button" id="btn_consult" name="btn_consult" style="width: 120px;">Consultation</button>
+        <button class="button" id="btn_note" name="btn_note" style="width: 120px;">Note</button>-->
         <span id="btn_note">New Note</span>
     </div>
         <div class="percent100">

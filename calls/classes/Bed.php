@@ -13,7 +13,7 @@ class Bed {
     private $database_obj = NULL;
     private static $table_name = 'beds';
     
-    public $bed_id, $bed_inventory_id, $ward_id, $int_profile_id, $title, $status, $date_created, $date_modified;
+    public $bed_id, $bed_inventory_id, $ward_id, $int_profile_id, $status, $date_created, $date_modified;
         
     
     /**
@@ -70,7 +70,6 @@ class Bed {
             $this->bed_inventory_id = isset($arr['bed_inventory_id'])? $arr['bed_inventory_id']:$this->bed_inventory_id;
             $this->ward_id          = isset($arr['ward_id'])         ? $arr['ward_id']:         $this->ward_id;
             $this->int_profile_id   = isset($arr['int_profile_id'])  ? $arr['int_profile_id']:  $this->int_profile_id;
-            $this->title            = isset($arr['title'])           ? $arr['title']:           $this->title;
             $this->status           = isset($arr['status'])          ? $arr['status']:          $this->status;
             $this->date_created     = isset($arr['date_created'])    ? $arr['date_created']:    $this->date_created;
             $this->date_modified    = isset($arr['date_modified'])   ? $arr['date_modified']:   $this->date_modified;*/
@@ -92,7 +91,6 @@ class Bed {
             $this->bed_inventory_id = isset($arr['bed_inventory_id'])? $arr['bed_inventory_id']: '';
             $this->ward_id        = isset($arr['ward_id'])        ? $arr['ward_id']:        '';
             $this->int_profile_id = isset($arr['int_profile_id']) ? $arr['int_profile_id']: '';
-            $this->title          = isset($arr['title'])          ? $arr['title']:          '';
             $this->status         = isset($arr['status'])         ? $arr['status']:         '';
             $this->bed_type       = isset($arr['bed_type'])       ? $arr['bed_type']:       '';
             $this->date_created   = isset($arr['date_created'])   ? $arr['date_created']:   '';
@@ -215,15 +213,14 @@ class Bed {
     public function insert_bed()
     {
         // SQL
-        $sql = " INSERT INTO ".self::$table_name." (bed_inventory_id, ward_id, int_profile_id, title, status, date_created, date_modified)
-                     VALUES (:bed_inventory_id, :ward_id, :int_profile_id, :title, :status, :date_created, :date_modified) ";
+        $sql = " INSERT INTO ".self::$table_name." (bed_inventory_id, ward_id, int_profile_id, status, date_created, date_modified)
+                     VALUES (:bed_inventory_id, :ward_id, :int_profile_id, :status, :date_created, :date_modified) ";
             
         // Bind
         $bind_array = array(
             ':bed_inventory_id'        => array($this->bed_inventory_id, PDO::PARAM_STR),
             ':ward_id'                 => array($this->ward_id, PDO::PARAM_STR),
             ':int_profile_id'          => array($this->int_profile_id, PDO::PARAM_STR),
-            ':title'                   => array($this->title, PDO::PARAM_STR),
             ':status'                  => array($this->status, PDO::PARAM_STR),
             ':date_created'            => array($this->date_created, PDO::PARAM_STR),
             ':date_modified'           => array($this->date_modified, PDO::PARAM_STR)
@@ -247,7 +244,6 @@ class Bed {
                  SET bed_inventory_id  = :bed_inventory_id,
                      ward_id           = :ward_id,
                      int_profile_id    = :int_profile_id,
-                     title             = :title,
                      status            = :status, 
                      date_created      = :date_created, 
                      date_modified     = :date_modified 
@@ -259,7 +255,6 @@ class Bed {
             ':bed_inventory_id'        => array($this->bed_inventory_id, PDO::PARAM_STR),
             ':ward_id'                 => array($this->ward_id, PDO::PARAM_STR),
             ':int_profile_id'          => array($this->int_profile_id, PDO::PARAM_STR),
-            ':title'                   => array($this->title, PDO::PARAM_STR),
             ':status'                  => array($this->status, PDO::PARAM_STR),
             ':date_created'            => array($this->date_created, PDO::PARAM_STR),
             ':date_modified'           => array($this->date_modified, PDO::PARAM_STR)

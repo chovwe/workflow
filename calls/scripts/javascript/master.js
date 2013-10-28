@@ -1,5 +1,5 @@
 /**
- * @author HDI
+ * @author Hope Gates
  * @copyright 2012
  */
 

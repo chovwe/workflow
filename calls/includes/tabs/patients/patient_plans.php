@@ -4,15 +4,13 @@
     
     // Class instances
     $session      = new Session();
-    $patient      = new Patient();
     $plan = new Plan();
     $int_profile  = new Int_Profile();
     $option       = new Option();
-    $patient_name = $patient->fetch_patient_name_by_id((int)$session->get_patient_id());
 ?>
     <div class="outter_pad">
         <div style="margin: 20px;">
-            <h2 style="padding: 0px; margin: 0px; color: #2d2d2d;  font-size: 18px;">Plans: (<?php echo $patient_name->name; ?>)</h2>
+            <h2 style="padding: 0px; margin: 0px; color: #2d2d2d;  font-size: 18px;">Plans: (Patient Name)</h2>
         </div>
     
         <div class="percent100">
@@ -29,8 +27,7 @@
                                 echo "<h3>".datetime_to_text($entry->entry_date)."</h3>";
                                 echo "<div>";
                                 echo '<table class="visible_table">';
-                                echo '<tr><td class="bold">Plan
-                                : </td>';
+                                echo '<tr><td class="bold">Note: </td>';
                                 echo "<td>".$entry->plan."</td>";
                                 echo "</tr>";
                                 echo '</table>';

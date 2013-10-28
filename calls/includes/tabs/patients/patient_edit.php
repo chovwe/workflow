@@ -541,7 +541,7 @@
                         {
                             $ui_engine.block({title:'Alert!',file:'alert_successful',width:'200',height:'120',buttons:'NNY'});
                             $file_loader.load_middle_pane('patients/patient_display');
-                            $file_loader.load_left_pane('patients/patient_menu');
+                            $file_loader.load_left_pane('patients/menu_left');
                         }
                         else
                         {

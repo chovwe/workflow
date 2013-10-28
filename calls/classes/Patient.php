@@ -123,20 +123,6 @@ class Patient
         return $this->database_obj->execute_query($sql,'A');
     }
     
-    public function fetch_patient_name_by_id($patient_id)
-    {
-        // SQL
-        $sql = "SELECT CONCAT(surname,' ', middle_name,' ',first_name) as name 
-                FROM ".self::$table_name." 
-                WHERE patient_id={$patient_id}
-                LIMIT 1
-                ";
-        
-        // Execute
-        $query = $this->database_obj->execute_query($sql,'O');
-        return array_shift($query);
-    }
-    
     /**
      * Patient::initialize_result_vars()
      * 
